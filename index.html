@@ -9,7 +9,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Poppins',sans-serif; background:#000; color:#fff; overflow-x:hidden; }
+    body { font-family:'Poppins',sans-serif; background:#000; color:#fff; overflow-x:hidden; scroll-behavior:smooth; }
 
     /* Navbar */
     .navbar {
@@ -58,9 +58,18 @@
     h1 { font-size:3.5em; font-weight:700; margin-bottom:15px; color:#fff; letter-spacing:-1px; text-shadow:0 0 20px rgba(88,101,242,0.3); }
     .subtitle { font-size:1.15em; color:#808080; margin-bottom:35px; font-weight:300; }
 
-    .social-links { display:flex; gap:15px; justify-content:center; }
+    .social-links { display:flex; gap:15px; justify-content:center; margin-bottom:25px; }
     .social-link { width:55px; height:55px; background: rgba(30,30,30,0.6); border:1px solid rgba(80,80,80,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; color:#999; font-size:1.3em; transition:all 0.4s; }
     .social-link:hover { transform:translateY(-8px) rotate(360deg); border-color:#5865F2; background:rgba(88,101,242,0.2); color:#5865F2; box-shadow:0 10px 25px rgba(88,101,242,0.3); }
+
+    /* Button Scroll */
+    .scroll-btn {
+      display:inline-block; background:#5865F2; color:#fff;
+      padding:12px 28px; border-radius:30px; text-decoration:none;
+      font-weight:600; font-size:1em; transition:all 0.4s;
+      box-shadow:0 0 15px rgba(88,101,242,0.3);
+    }
+    .scroll-btn:hover { transform:translateY(-5px); box-shadow:0 0 25px rgba(88,101,242,0.6); }
 
     /* Experiences */
     #experiences { padding:100px 0; }
@@ -95,7 +104,7 @@
   <div class="profile-card">
     <div class="profile-image-wrapper">
       <a href="https://example.com" target="_blank">
-        <img src="https://i.ibb.co/7g6L6DZ/6843c22e-22f4-4510-b509-6f60f6e4fe78.png" alt="Gabonx" class="profile-image">
+        <img src="https://i.postimg.cc/pLLdX2SP/2e25b8799357373fdf428e280f15612d.png" alt="Gabonx" class="profile-image">
       </a>
       <div class="status-badge"></div>
     </div>
@@ -105,6 +114,7 @@
       <a href="https://discord.gg/2aQxAYhzdW" class="social-link"><i class="fab fa-discord"></i></a>
       <a href="https://discord.gg/WdV465ZjvP" class="social-link"><i class="fab fa-discord"></i></a>
     </div>
+    <a href="#experiences" class="scroll-btn">Voir ses expériences</a>
   </div>
 </div>
 
