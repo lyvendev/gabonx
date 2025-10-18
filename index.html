@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gabonx - Profil</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Poppins',sans-serif; background:#000; color:#fff; overflow-x:hidden; }
+
+    /* Navbar */
+    .navbar {
+      position: fixed; top:0; left:0; width:100%;
+      background: rgba(10,10,10,0.85); backdrop-filter:blur(10px);
+      display:flex; justify-content:center; gap:40px; padding:20px 0; z-index:100;
+      border-bottom:1px solid rgba(88,101,242,0.3);
+    }
+    .navbar a { color:#fff; text-decoration:none; font-weight:500; font-size:1.1em; transition:color 0.3s; }
+    .navbar a:hover { color:#5865F2; }
+
+    /* Background & Stars */
+    .background { position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:-2; }
+    .noise { position:fixed; top:0; left:0; width:100%; height:100%; opacity:0.02; z-index:-1; 
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+    .stars { position:fixed; width:100%; height:100%; top:0; left:0; z-index:-1; }
+    .star { position:absolute; width:1px; height:1px; background:#fff; border-radius:50%; animation:twinkle 5s infinite ease-in-out; }
+    @keyframes twinkle { 0%,100%{opacity:0.1;}50%{opacity:0.8;} }
+
+    .moon {
+      position: fixed; top:8%; right:10%; width:130px; height:130px;
+      background: radial-gradient(circle at 35% 35%, #e0e0e0, #a0a0a0 50%, #707070);
+      border-radius:50%; box-shadow:0 0 60px rgba(200,200,200,0.25);
+      z-index:0; animation: floatMoon 10s ease-in-out infinite;
+    }
+    @keyframes floatMoon { 0%,100%{transform:translateY(0px);}50%{transform:translateY(-20px);} }
+
+    /* Container */
+    .container { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:120px 20px 40px; position:relative; z-index:1; }
+
+    /* Profile Card */
+    .profile-card {
+      background: rgba(20,20,20,0.4); border:1px solid rgba(60,60,60,0.3); border-radius:30px;
+      padding:60px 50px; text-align:center; backdrop-filter:blur(10px);
+      box-shadow:0 8px 32px rgba(0,0,0,0.8); animation:fadeInScale 1s ease; max-width:600px; width:100%;
+    }
+    @keyframes fadeInScale { from {opacity:0; transform:scale(0.95);} to {opacity:1; transform:scale(1);} }
+
+    .profile-image-wrapper { position:relative; display:inline-block; margin-bottom:30px; }
+    .profile-image { width:160px; height:160px; border-radius:50%; border:3px solid #5865F2; box-shadow:0 0 30px rgba(88,101,242,0.4); animation:profilePulse 4s infinite; object-fit:cover; }
+    @keyframes profilePulse { 0%,100%{transform:scale(1); box-shadow:0 0 30px rgba(88,101,242,0.4);}50%{transform:scale(1.03); box-shadow:0 0 40px rgba(88,101,242,0.5);} }
+
+    .status-badge { position:absolute; bottom:10px; right:10px; width:32px; height:32px; background:#43B581; border:4px solid #0a0a0a; border-radius:50%; animation:statusPulse 2.5s infinite; }
+    @keyframes statusPulse { 0%,100%{box-shadow:0 0 0 0 rgba(67,181,129,0.6);}50%{box-shadow:0 0 0 8px rgba(67,181,129,0);} }
+
+    h1 { font-size:3.5em; font-weight:700; margin-bottom:15px; color:#fff; letter-spacing:-1px; text-shadow:0 0 20px rgba(88,101,242,0.3); }
+    .subtitle { font-size:1.15em; color:#808080; margin-bottom:35px; font-weight:300; }
+
+    .social-links { display:flex; gap:15px; justify-content:center; }
+    .social-link { width:55px; height:55px; background: rgba(30,30,30,0.6); border:1px solid rgba(80,80,80,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; color:#999; font-size:1.3em; transition:all 0.4s; }
+    .social-link:hover { transform:translateY(-8px) rotate(360deg); border-color:#5865F2; background:rgba(88,101,242,0.2); color:#5865F2; box-shadow:0 10px 25px rgba(88,101,242,0.3); }
+
+    /* Experiences */
+    #experiences { padding:100px 0; }
+    .skills-section { max-width:1200px; margin:0 auto; text-align:center; }
+    .section-title { font-size:2.5em; font-weight:700; margin-bottom:50px; color:#fff; text-shadow:0 0 20px rgba(88,101,242,0.2); }
+
+    .experience-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:30px; padding:0 30px; }
+    .experience-card {
+      background: rgba(20,20,20,0.4); border:1px solid rgba(60,60,60,0.3); border-radius:25px;
+      padding:30px; text-align:center; backdrop-filter:blur(10px); transition:all 0.4s;
+    }
+    .experience-card:hover { transform:translateY(-10px); border-color:rgba(88,101,242,0.4); box-shadow:0 15px 40px rgba(88,101,242,0.2); }
+    .experience-card h3 { color:#fff; font-size:1.4em; margin-bottom:10px; }
+    .experience-card p { color:#808080; font-size:0.95em; line-height:1.4; margin-bottom:8px; }
+    .experience-card a { color:#5865F2; text-decoration:none; font-weight:500; }
+
+    @media (max-width:768px) { .profile-card { padding:40px 30px; } h1 { font-size:2.5em; } }
+  </style>
+</head>
+<body>
+<div class="background"></div>
+<div class="noise"></div>
+<div class="stars" id="stars"></div>
+<div class="moon"></div>
+
+<div class="navbar">
+  <a href="#top">Accueil</a>
+  <a href="#experiences">Expériences</a>
+</div>
+
+<div class="container" id="top">
+  <div class="profile-card">
+    <div class="profile-image-wrapper">
+      <a href="https://example.com" target="_blank">
+        <img src="https://i.ibb.co/7g6L6DZ/6843c22e-22f4-4510-b509-6f60f6e4fe78.png" alt="Gabonx" class="profile-image">
+      </a>
+      <div class="status-badge"></div>
+    </div>
+    <h1>Gabonx</h1>
+    <p class="subtitle">Manager for StellX & Admin for Nezio</p>
+    <div class="social-links">
+      <a href="https://discord.gg/2aQxAYhzdW" class="social-link"><i class="fab fa-discord"></i></a>
+      <a href="https://discord.gg/WdV465ZjvP" class="social-link"><i class="fab fa-discord"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- Section Expériences -->
+<div id="experiences">
+  <div class="skills-section">
+    <h2 class="section-title">Expériences</h2>
+    <div class="experience-grid">
+      <div class="experience-card">
+        <h3>Manager</h3>
+        <p>StellX</p>
+        <a href="https://discord.gg/2aQxAYhzdW">Serveur Discord</a>
+      </div>
+      <div class="experience-card">
+        <h3>Admin</h3>
+        <p>Nezio</p>
+        <a href="https://discord.gg/WdV465ZjvP">Serveur Discord</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Génération des étoiles
+  const starsContainer = document.getElementById('stars');
+  const starCount = 200;
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 5 + 's';
+    star.style.animationDuration = (4 + Math.random() * 4) + 's';
+    if (Math.random() > 0.95) { star.style.width = '2px'; star.style.height = '2px'; }
+    starsContainer.appendChild(star);
+  }
+
+  // Parallaxe
+  document.addEventListener('mousemove', (e) => {
+    const moon = document.querySelector('.moon');
+    const cards = document.querySelectorAll('.experience-card');
+    const x = (e.clientX / window.innerWidth - 0.5) * 15;
+    const y = (e.clientY / window.innerHeight - 0.5) * 15;
+    moon.style.transform = `translate(${x}px, ${y}px)`;
+    cards.forEach((card, index) => {
+      const speed = (index + 1) * 0.3;
+      card.style.transform = `translate(${x * speed * 0.1}px, ${y * speed * 0.1}px)`;
+    });
+  });
+</script>
+</body>
+</html>
